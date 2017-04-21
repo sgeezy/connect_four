@@ -8,10 +8,6 @@ module ConnectFour
                 expect { Board.new(grid: "grid") }.to_not raise_error
             end
             
-            it "initializes with an error with no grid" do
-                expect {Board.new({}) }.to raise_error
-            end
-            
             it "initializes with 6 rows by default" do
                board = Board.new
                expect(board.grid.size).to eq(6)
@@ -23,8 +19,24 @@ module ConnectFour
                     expect(row.size).to eq(7)
                 end
             end
-                
         end
+        
+        context "#grid" do
+            it "returns the grid" do
+                board = Board.new(grid: "check")
+                expect(board.grid).to eq "check"
+            end
+        end
+        
+        context "#get_cell" do
+           it "returns the cell based on the (x, y) coordinate" do
+               grid = [["","","","","","",""],["","","","","","","test"],["","","","","","",""],["","","","","","",""],["","","","","","",""],
+               ["","","","","","",""]]
+               board = Board.new(grid: grid)
+               expect(board.get_cell(6,1)).to eq("test")
+           end
+        end
+            
         
     end    
 end
