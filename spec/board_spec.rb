@@ -36,6 +36,39 @@ module ConnectFour
                expect(board.get_cell(6,1)).to eq("test")
            end
         end
+        
+        context "#set_cell" do
+            it "gets cell and sets cell to new value" do
+                Old = Struct.new(:value)
+                grid = [[Old.new("begin"),"","","","","",""],["","","","","","",""],["","","","","","",""],["","","","","","",""],["","","","","","",""],
+               ["","","","","","",""]]
+               board = Board.new(grid: grid)
+               board.set_cell(0, 0, "end")
+               expect(board.get_cell(0,0).value).to eq("end")
+           end
+       end
+       
+       context "#game_over" do
+           it "returns :winner if winner? is true" do
+               board = Board.new
+               board.stub(:winner?) { true }
+               expect(board.game_over).to eq(:winner)
+           end
+           
+           it "returns :draw if winner? is false and draw? is true" do
+               board = Board.new
+               board.stub(:winner?) { false }
+               board.stub(:draw?) { true }
+               expect(board.game_over).to eq(:draw)
+           end
+           
+           it "returns false if winner? is false and draw? is false" do
+               board = Board.new
+               board.stub(:winner?) { false }
+               board.stub(:draw?) { false }
+               expect(board.game_over).to be false
+           end
+       end
             
         
     end    
