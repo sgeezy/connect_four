@@ -19,6 +19,18 @@ module ConnectFour
             false
         end
         
+        def all_empty(array)
+            array.any? { |element| element.to_s.empty? }
+        end        
+
+        def any_empty?
+          Array.any? { |element| element.to_s.empty? }
+        end        
+        
+        def draw?
+            grid.flatten.map { |cell| cell.value }.any? { |element| element.to_s.empty? }
+        end        
+        
         private
         
         def default_grid
