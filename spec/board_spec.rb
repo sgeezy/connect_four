@@ -89,8 +89,12 @@ module ConnectFour
            end
            
            it "returns :winner if four consecutive cells of one type are in a diagonal" do
-               grid = [[empty,empty,empty,empty,empty,empty,empty],[empty,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,b_cell,empty,empty,empty],[r_cell,r_cell,b_cell,r_cell,empty,empty,empty],[r_cell,b_cell,b_cell,b_cell,empty,empty,empty],
-               [b_cell,r_cell,r_cell,r_cell,empty,empty,empty]]
+               grid = [[empty,empty,empty,empty,empty,empty,empty],
+                       [empty,empty,empty,empty,empty,empty,empty],
+                       [r_cell,empty,empty,b_cell,empty,empty,empty],
+                       [r_cell,r_cell,b_cell,r_cell,empty,empty,empty],
+                       [r_cell,b_cell,r_cell,b_cell,empty,empty,empty],
+                       [b_cell,r_cell,r_cell,r_cell,empty,empty,empty]]
                board = Board.new(grid: grid)
                expect(board.game_over).to eq(:winner)
            end
