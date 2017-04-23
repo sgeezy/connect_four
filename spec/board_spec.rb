@@ -48,6 +48,11 @@ module ConnectFour
            end
        end
        
+        TestCell = Struct.new(:value)
+        let(:b_cell) { TestCell.new("B") }
+        let(:r_cell) { TestCell.new("R") }
+        let(:empty) { TestCell.new }
+       
        context "#game_over" do
            it "returns :winner if winner? is true" do
                board = Board.new
@@ -68,12 +73,34 @@ module ConnectFour
                board.stub(:draw?) { false }
                expect(board.game_over).to be false
            end
-       end
-       
-       context "#all_empty?" do
-            it "returns true if all elements of the Array are empty" do
-                  expect(all_empty(["","",""])).to be_true
-            end
+           
+           it "returns :winner if four consecutive cells of one type are in a row" do
+               grid = [[empty,empty,empty,empty,empty,empty,empty],[empty,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],
+               [b_cell,b_cell,b_cell,b_cell,empty,empty,empty]]
+               board = Board.new(grid: grid)
+               expect(board.game_over).to eq(:winner)
+           end
+           
+           it "returns :winner if four consecutive cells of one type are in a column" do
+               grid = [[empty,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],
+               [b_cell,b_cell,b_cell,empty,empty,empty,empty]]
+               board = Board.new(grid: grid)
+               expect(board.game_over).to eq(:winner)
+           end
+           
+           it "returns :winner if four consecutive cells of one type are in a diagonal" do
+               grid = [[empty,empty,empty,empty,empty,empty,empty],[empty,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,b_cell,empty,empty,empty],[r_cell,r_cell,b_cell,r_cell,empty,empty,empty],[r_cell,b_cell,b_cell,b_cell,empty,empty,empty],
+               [b_cell,r_cell,r_cell,r_cell,empty,empty,empty]]
+               board = Board.new(grid: grid)
+               expect(board.game_over).to eq(:winner)
+           end
+           
+           it "returns false if :winner and :draw are false" do
+               grid = [[empty,empty,empty,empty,empty,empty,empty],[empty,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],
+               [b_cell,b_cell,b_cell,b_cell,empty,empty,empty]]
+               board = Board.new(grid: grid)
+               expect(board.game_over).to be false
+           end
        end
             
         
