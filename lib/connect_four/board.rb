@@ -13,6 +13,22 @@ module ConnectFour
             get_cell(x,y).value = value
         end
         
+        def first_empty(human_move)
+            if get_cell(human_move.to_i, 5) == ""
+                5
+            elsif get_cell(human_move.to_i, 4) == ""
+                4
+            elsif get_cell(human_move.to_i, 3) == ""    
+                3
+            elsif get_cell(human_move.to_i, 2) == ""
+                2
+            elsif get_cell(human_move.to_i, 1) == ""
+                1
+            else
+                0
+            end
+        end
+        
         def game_over
             return :winner if winner?
             return :draw if draw?
