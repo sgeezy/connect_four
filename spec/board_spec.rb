@@ -97,7 +97,7 @@ module ConnectFour
            
            it "returns false if :winner and :draw are false" do
                grid = [[empty,empty,empty,empty,empty,empty,empty],[empty,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],
-               [b_cell,b_cell,b_cell,b_cell,empty,empty,empty]]
+               [b_cell,b_cell,b_cell,empty,empty,empty,empty]]
                board = Board.new(grid: grid)
                expect(board.game_over).to be false
            end

@@ -42,7 +42,7 @@ module ConnectFour
         
         def diagonals
             [
-                [get_cell(0,0), get_cell(1,1), ]
+                [get_cell(0,0), get_cell(1,1), get_cell(2,2), get_cell(3,3)],[get_cell(1,1), get_cell(2,2), get_cell(3,3), get_cell(4,4)]
                 ]
         end
         
@@ -50,12 +50,8 @@ module ConnectFour
             winning_position.map { |cell| cell.value }
         end
         
-        def all_empty(array)
-            array.any? { |element| element.to_s.empty? }
-        end        
-        
         def draw?
-            grid.flatten.map { |cell| cell.value }.any? { |element| element.to_s.empty? }
+            !grid.flatten.map { |cell| cell.value }.any? { |element| element.to_s.empty? }
         end        
         
         private
