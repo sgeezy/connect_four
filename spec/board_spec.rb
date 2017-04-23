@@ -95,6 +95,17 @@ module ConnectFour
                expect(board.game_over).to eq(:winner)
            end
            
+           it "returns :draw if all spaces are filled and winner? is false" do
+               grid = [[r_cell,b_cell,r_cell,b_cell,r_cell,b_cell,r_cell],
+                       [b_cell,r_cell,b_cell,r_cell,b_cell,r_cell,b_cell],
+                       [b_cell,r_cell,b_cell,r_cell,b_cell,r_cell,b_cell],
+                       [r_cell,b_cell,r_cell,b_cell,r_cell,b_cell,r_cell],
+                       [r_cell,b_cell,r_cell,b_cell,r_cell,b_cell,r_cell],
+                       [b_cell,r_cell,b_cell,r_cell,b_cell,r_cell,b_cell]]
+               board = Board.new(grid: grid)
+               expect(board.game_over).to eq(:draw)
+           end
+           
            it "returns false if :winner and :draw are false" do
                grid = [[empty,empty,empty,empty,empty,empty,empty],[empty,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],[r_cell,empty,empty,empty,empty,empty,empty],
                [b_cell,b_cell,b_cell,empty,empty,empty,empty]]
