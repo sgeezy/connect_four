@@ -1,9 +1,7 @@
-require "connect_four/version"
+require_relative "connect_four/version"
 
 module ConnectFour
-  # Your code goes here...
 end
 
-require "connect_four/cell"
-require "connect_four/player"
-require "connect_four/board"
+lib_path = File.expand_path(File.dirname(__FILE__))
+Dir[lib_path + "/connect_four/**/*.rb"].each { |file| require file }

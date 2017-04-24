@@ -48,10 +48,13 @@ module ConnectFour
            end
        end
        
+       
+       
         TestCell = Struct.new(:value)
         let(:b_cell) { TestCell.new("B") }
         let(:r_cell) { TestCell.new("R") }
         let(:empty) { TestCell.new }
+       
        
        context "#game_over" do
            it "returns :winner if winner? is true" do

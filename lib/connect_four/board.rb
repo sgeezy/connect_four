@@ -19,6 +19,20 @@ module ConnectFour
             false
         end
         
+        
+        def formatted_grid
+          grid.each do |row|
+            puts row.map { |cell| cell.value.empty? ? "_" : cell.value }.join(" ")
+          end
+        end        
+        
+        private
+        
+        
+        def default_grid
+           Array.new(6) { Array.new(7) { Cell.new } }
+        end
+        
         def winner?
             winning_positions.each do |winning_position|
                 next if winning_position_values(winning_position).any? { |element| element.to_s.empty? }
@@ -77,14 +91,6 @@ module ConnectFour
                 [get_cell(0,3), get_cell(1,2), get_cell(2,1), get_cell(3,0)]
                 ]
         end
-        
-        
-        private
-        
-        def default_grid
-           Array.new(6) { Array.new(7) { Cell.new } }
-        end
-        
     end
 end
       

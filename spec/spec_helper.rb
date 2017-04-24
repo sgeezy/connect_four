@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "connect_four"
+require_relative "../lib/connect_four.rb"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
