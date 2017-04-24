@@ -13,26 +13,24 @@ module ConnectFour
             get_cell(x,y).value = value
         end
         
-        def first_empty(human_move)
-            if get_cell(human_move.to_i, 5) == ""
-                5
-            elsif get_cell(human_move.to_i, 4) == ""
-                4
-            elsif get_cell(human_move.to_i, 3) == ""    
-                3
-            elsif get_cell(human_move.to_i, 2) == ""
-                2
-            elsif get_cell(human_move.to_i, 1) == ""
-                1
-            else
-                0
-            end
-        end
-        
         def game_over
             return :winner if winner?
             return :draw if draw?
             false
+        end
+        
+        
+        def formatted_grid
+          grid.each do |row|
+            puts row.map { |cell| cell.value.empty? ? "_" : cell.value }.join(" ")
+          end
+        end        
+        
+        private
+        
+        
+        def default_grid
+           Array.new(6) { Array.new(7) { Cell.new } }
         end
         
         def winner?
@@ -93,14 +91,6 @@ module ConnectFour
                 [get_cell(0,3), get_cell(1,2), get_cell(2,1), get_cell(3,0)]
                 ]
         end
-        
-        
-        private
-        
-        def default_grid
-           Array.new(6) { Array.new(7) { Cell.new } }
-        end
-        
     end
 end
       

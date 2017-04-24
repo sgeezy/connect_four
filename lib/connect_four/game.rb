@@ -15,57 +15,49 @@ module ConnectFour
             "#{current_player.name}: please enter a column number 1 to 7 to drop your piece"
         end
         
-        def get_move(human_move)
+        def get_move(human_move = gets.chomp)
             space = human_move.to_i
             space -= 1
             col = board.grid.transpose[space]
-            if ![[col[5]]][0].empty?
+            if  col[5].value.empty?
                 [space, 5]
-                elsif ![[col[4]]][0].empty?
+                elsif col[4].value.empty?
                 [space, 4]
-                elsif ![[col[3]]][0].empty?
+                elsif col[3].value.empty?
                 [space, 3]
-                elsif ![[col[2]]][0].empty?
+                elsif col[2].value.empty?
                 [space, 2]
-                elsif ![[col[1]]][0].empty?
+                elsif col[1].value.empty?
                 [space, 1]
-            else
+                elsif col[0].value.empty?
                 [space, 0]
+            else
+                "No Space"
             end
         end
                
+        def game_over_message
+          return "#{current_player.name} won!" if board.game_over == :winner
+          return "The game ended in a tie" if board.game_over == :draw
+        end
         
-        # def first_empty(human_move)
-        #     if board.get_cell(human_move.to_i, 5).value == ""
-        #         5
-        #     elsif board.get_cell(human_move.to_i, 4) == ""
-        #         4
-        #     elsif board.get_cell(human_move.to_i, 3) == ""    
-        #         3
-        #     elsif board.get_cell(human_move.to_i, 2) == ""
-        #         2
-        #     elsif board.get_cell(human_move.to_i, 1) == ""
-        #         1
-        #     else
-        #         0
-        #     end
-        # end
-        
-        # private
-        
-        # def human_move_to_coordinate(human_move)
-        #     mapping = {
-        #     "1" => [0, first_empty],
-        #     "2" => [1, first_empty],
-        #     "3" => [2, first_empty],
-        #     "4" => [3, first_empty],
-        #     "5" => [4, first_empty],
-        #     "6" => [5, first_empty],
-        #     "7" => [6, first_empty],
-        #     }
-        #     mapping[human_move]
-        # end
-        
+        def play
+          puts "#{current_player.name} has randomly been selected as the first player"
+          while true
+            board.formatted_grid
+            puts ""
+            puts solicit_move
+            x, y = get_move
+            board.set_cell(x, y, current_player.color)
+            if board.game_over
+              puts game_over_message
+              board.formatted_grid
+              return
+            else
+              switch_players
+            end
+          end
+        end        
         
         
     end

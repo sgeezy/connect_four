@@ -55,19 +55,6 @@ module ConnectFour
         let(:r_cell) { TestCell.new("R") }
         let(:empty) { TestCell.new }
        
-        context "#first_empty" do
-            it "will return the y coordinate of first_empty cell of column from bottom-up" do
-                grid = [[empty,empty,empty,empty,empty,empty,empty],
-                      [empty,empty,empty,empty,empty,empty,empty],
-                      [r_cell,empty,empty,b_cell,empty,empty,empty],
-                      [r_cell,empty,b_cell,r_cell,empty,empty,empty],
-                      [r_cell,empty,r_cell,b_cell,empty,empty,empty],
-                      [b_cell,empty,r_cell,r_cell,empty,empty,empty]]
-                human_move = "1"
-                board = Board.new(grid: grid)
-                expect(board.first_empty(human_move)).to eq 5
-            end
-        end
        
        context "#game_over" do
            it "returns :winner if winner? is true" do

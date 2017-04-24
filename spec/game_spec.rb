@@ -4,6 +4,7 @@ module ConnectFour
     describe Game do
         let (:player1) { Player.new({color: "R", name: "player1"}) }
         let (:player2) { Player.new({color: "B", name: "player2"}) }
+        let (:board) { Board.new }
         
         context "#initialize" do
             it "randomly selects a player to start" do
@@ -72,7 +73,35 @@ module ConnectFour
                 game = Game.new([player1, player2])
                 expect(game.get_move("2")).to eq [1, 5]
             end
+            
+            it "will take current_player move of '4' and selects first empty cell bottom-up [3, 5]" do
+                game = Game.new([player1, player2], board)
+                expect(game.get_move("4")).to eq [3, 5]
+            end            
+            
+            it "will go to the next space up in column if bottom spot is filled" do
+               game = Game.new([player1, player2])
+               board.set_cell(0,5, "B")
+               expect(game.get_move("1")).to eq [0, 4]
+            end
         end
+        
+        context "#game_over_message" do
+          it "returns '{current player name} won!' if board shows a winner" do
+            game = Game.new([player1, player2])
+            allow(game).to receive(:current_player) { player1 }
+            allow(game.board).to receive(:game_over) { :winner }
+            expect(game.game_over_message).to eq "player1 won!"
+          end
+    
+          it "returns 'The game ended in a tie' if board shows a draw" do
+            game = Game.new([player1, player2])
+            allow(game).to receive(:current_player) { player1 }
+            allow(game.board).to receive(:game_over) { :draw }
+            expect(game.game_over_message).to eq "The game ended in a tie"
+          end
+        end        
         
     end
 end
+
