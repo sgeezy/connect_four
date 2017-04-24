@@ -16,39 +16,55 @@ module ConnectFour
         end
         
         def get_move(human_move)
-            human_move_to_coordinate(human_move)
-        end
-        
-        def first_empty(human_move)
-            if board.get_cell(human_move.to_i, 5).value == ""
-                5
-            elsif board.get_cell(human_move.to_i, 4) == ""
-                4
-            elsif board.get_cell(human_move.to_i, 3) == ""    
-                3
-            elsif board.get_cell(human_move.to_i, 2) == ""
-                2
-            elsif board.get_cell(human_move.to_i, 1) == ""
-                1
+            space = human_move.to_i
+            space -= 1
+            col = board.grid.transpose[space]
+            if ![[col[5]]][0].empty?
+                [space, 5]
+                elsif ![[col[4]]][0].empty?
+                [space, 4]
+                elsif ![[col[3]]][0].empty?
+                [space, 3]
+                elsif ![[col[2]]][0].empty?
+                [space, 2]
+                elsif ![[col[1]]][0].empty?
+                [space, 1]
             else
-                0
+                [space, 0]
             end
         end
+               
         
-        private
+        # def first_empty(human_move)
+        #     if board.get_cell(human_move.to_i, 5).value == ""
+        #         5
+        #     elsif board.get_cell(human_move.to_i, 4) == ""
+        #         4
+        #     elsif board.get_cell(human_move.to_i, 3) == ""    
+        #         3
+        #     elsif board.get_cell(human_move.to_i, 2) == ""
+        #         2
+        #     elsif board.get_cell(human_move.to_i, 1) == ""
+        #         1
+        #     else
+        #         0
+        #     end
+        # end
         
-        def human_move_to_coordinate(human_move)
-            mapping = {
-            "1" => [0, first_empty],
-            "2" => [1, first_empty],
-            "3" => [2, first_empty],
-            "4" => [3, first_empty],
-            "5" => [4, first_empty],
-            "6" => [5, first_empty],
-            "7" => [6, first_empty],
-            }
-            mapping[human_move]
-        end
+        # private
+        
+        # def human_move_to_coordinate(human_move)
+        #     mapping = {
+        #     "1" => [0, first_empty],
+        #     "2" => [1, first_empty],
+        #     "3" => [2, first_empty],
+        #     "4" => [3, first_empty],
+        #     "5" => [4, first_empty],
+        #     "6" => [5, first_empty],
+        #     "7" => [6, first_empty],
+        #     }
+        #     mapping[human_move]
+        # end
         
         
         

@@ -49,26 +49,26 @@ module ConnectFour
         let(:r_cell) { TestCell.new("R") }
         let(:empty) { TestCell.new } 
         
-        context "#first_empty" do
-            it "will return the y coordinate of first_empty cell of column from bottom-up" do
-                game = Game.new([player1,player2])
-                grid = [[empty,empty,empty,empty,empty,empty,empty],
-                      [empty,empty,empty,empty,empty,empty,empty],
-                      [r_cell,empty,empty,b_cell,empty,empty,empty],
-                      [r_cell,empty,b_cell,r_cell,empty,empty,empty],
-                      [r_cell,empty,r_cell,b_cell,empty,empty,empty],
-                      [b_cell,empty,r_cell,r_cell,empty,empty,empty]]
-                human_move = "2"
-               board = Board.new(grid: grid)
-               expect(game.first_empty(human_move)).to eq 5
-            end
-        end
+        # context "#first_empty" do
+        #     it "will return the y coordinate of first_empty cell of column from bottom-up" do
+        #         game = Game.new([player1,player2])
+        #         grid = [[empty,empty,empty,empty,empty,empty,empty],
+        #               [empty,empty,empty,empty,empty,empty,empty],
+        #               [r_cell,empty,empty,b_cell,empty,empty,empty],
+        #               [r_cell,empty,b_cell,r_cell,empty,empty,empty],
+        #               [r_cell,empty,r_cell,b_cell,empty,empty,empty],
+        #               [b_cell,empty,r_cell,r_cell,empty,empty,empty]]
+        #         human_move = "2"
+        #       board = Board.new(grid: grid)
+        #       expect(game.first_empty(human_move)).to eq 5
+        #     end
+        # end
         
         
         context "#get_move" do
             
             
-            it "will take current_player move of '2' and selects first empty cell bottom-up [0, 5]" do
+            it "will take current_player move of '2' and selects first empty cell bottom-up [1, 5]" do
                 game = Game.new([player1, player2])
                 expect(game.get_move("2")).to eq [1, 5]
             end
